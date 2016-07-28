@@ -1,0 +1,4 @@
+class Tribe
+
+
+end
