@@ -20,12 +20,41 @@ require_relative "jury"
 
 #This is where you will write your code for the three phases
 def phase_one
+	 immunity_challenges = 8
+	 eliminated_members = []
+	 immunity_challenges.times do
+	 	losing_tribe = @borneo.immunity_challenge
+	 	immune_player = @merge_tribe.members.shuffle![0]
+	 	eliminated_member = losing_tribe.tribal_council(immune: immune_player)
+	 	losing_tribe.members.delete(eliminated_member)
+	 	eliminated_members.push(eliminated_member)
+	 end
+	eliminated_members.length
 end
 
 def phase_two
+	 immunity_challenges = 3
+	 eliminated_members = []
+	 immunity_challenges.times do
+	 	immune_player = @borneo.individual_immunity_challenge
+	 	eliminated_member = @merge_tribe.tribal_council(immune: immune_player)
+	 	@merge_tribe.members.delete(eliminated_member)
+	 	eliminated_members.push(eliminated_member)
+	 end
+	 eliminated_members.length
 end
 
 def phase_three
+	 immunity_challenges = 7
+	 eliminated_members = []
+	 immunity_challenges.times do
+	 	immune_player = @borneo.individual_immunity_challenge
+	 	eliminated_member = @merge_tribe.tribal_council(immune: immune_player)
+	 	@merge_tribe.members.delete(eliminated_member)
+	 	eliminated_members.push(eliminated_member)
+	 	@jury.add_member(eliminated_member)
+	 end
+	 eliminated_members.length
 end
 
 
