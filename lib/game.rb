@@ -10,7 +10,13 @@ class Game
 	end
 
 	def immunity_challenge
-		@tribes.shuffle![0]
+		immunity_challenge_winner = @tribes.shuffle![0]
+		puts_immunity_challenge_winner(immunity_challenge_winner)
+		immunity_challenge_winner
+	end
+
+	def get_losing_tribe(winning_tribe)
+		@tribes.find { |tribe| tribe.name != winning_tribe.name}
 	end
 
 	def clear_tribes
@@ -26,6 +32,16 @@ class Game
 	end
 
 	def individual_immunity_challenge
-		@tribes.first().members.shuffle![0]
+		individual_immunity_challenge_winner = @tribes.first().members.shuffle![0]
+		puts_individual_immunity_challenge_winner(individual_immunity_challenge_winner)
+		individual_immunity_challenge_winner
 	end
+
+	def puts_immunity_challenge_winner(immunity_challenge_winner)
+    	puts "Tribe #{immunity_challenge_winner} won the immunity challenge and is safe from elimination."
+  	end
+
+  	def puts_individual_immunity_challenge_winner(individual_immunity_challenge_winner)
+    	puts "#{individual_immunity_challenge_winner} won the individual immunity challenge and is safe from elimination."
+  	end
 end

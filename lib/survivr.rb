@@ -10,6 +10,7 @@ require_relative "jury"
 @contestants.map!{ |contestant| Contestant.new(contestant) }.shuffle!
 
 # Create two new tribes with names
+puts "\nWelcome to Survivr!".black.on_yellow.blink
 @coyopa = Tribe.new(name: "Pagong", members: @contestants.shift(10))
 @hunapu = Tribe.new(name: "Tagi", members: @contestants.shift(10))
 
@@ -20,12 +21,14 @@ require_relative "jury"
 
 #This is where you will write your code for the three phases
 def phase_one
+	puts "\nPhase One".colorize(:color => :blue, :background => :white)
 	 immunity_challenges = 8
 	 eliminated_members = []
 	 immunity_challenges.times do
-	 	losing_tribe = @borneo.immunity_challenge
-	 	immune_player = losing_tribe.members.shuffle![0]
-	 	eliminated_member = losing_tribe.tribal_council(immune: immune_player)
+	 	immune_tribe = @borneo.immunity_challenge
+	 	# losing_tribe = @borneo
+	 	losing_tribe = @borneo.get_losing_tribe(immune_tribe)
+	 	eliminated_member = losing_tribe.tribal_council(immune: immune_tribe.members)
 	 	losing_tribe.members.delete(eliminated_member)
 	 	eliminated_members.push(eliminated_member)
 	 end
@@ -33,6 +36,7 @@ def phase_one
 end
 
 def phase_two
+	puts "\nPhase Two".colorize(:color => :blue, :background => :white)
 	 immunity_challenges = 3
 	 eliminated_members = []
 	 immunity_challenges.times do
@@ -45,6 +49,7 @@ def phase_two
 end
 
 def phase_three
+	puts "\nPhase Three".colorize(:color => :blue, :background => :white)
 	 immunity_challenges = 7
 	 eliminated_members = []
 	 immunity_challenges.times do

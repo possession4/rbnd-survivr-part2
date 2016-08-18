@@ -1,3 +1,4 @@
+require 'colorize'
 class Jury
 	attr_accessor :members
 
@@ -11,10 +12,9 @@ class Jury
 
 	def cast_votes(finalists)
     votes = Hash[finalists.map { |f| [f, 0] }]
-    
     @members.each do |member|
       finalist = finalists.shuffle![0]
-      puts "#{member.name} voted for #{finalist}"
+      puts "#{member.name} cast their vote for #{finalist}"
       votes[finalist] += 1
     end
 		votes
@@ -28,7 +28,9 @@ class Jury
 
   def announce_winner(final_votes)
     winner = final_votes.max_by { |k, v| v }
+    puts "\nThe winner is #{winner[0].to_s.colorize(:yellow)}!"
     winner[0]
   end
+  
   
 end
