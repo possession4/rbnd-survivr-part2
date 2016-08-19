@@ -10,7 +10,7 @@ class Game
 	end
 
 	def immunity_challenge
-		immunity_challenge_winner = @tribes.shuffle![0]
+		immunity_challenge_winner = @tribes.sample
 		puts_immunity_challenge_winner(immunity_challenge_winner)
 		immunity_challenge_winner
 	end
@@ -29,10 +29,13 @@ class Game
 			all_members += tribe.members
 		end
 		mega_tribe = Tribe.new({ name: tribe_name, members: all_members })
+		clear_tribes
+		add_tribe(mega_tribe)
+		mega_tribe
 	end
 
 	def individual_immunity_challenge
-		individual_immunity_challenge_winner = @tribes.first().members.shuffle![0]
+		individual_immunity_challenge_winner = @tribes.sample().members.sample
 		puts_individual_immunity_challenge_winner(individual_immunity_challenge_winner)
 		individual_immunity_challenge_winner
 	end

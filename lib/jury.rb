@@ -11,9 +11,9 @@ class Jury
   end
 
 	def cast_votes(finalists)
-    votes = Hash[finalists.map { |f| [f, 0] }]
+    votes = Hash[finalists.map { |finalist| [finalist, 0] }]
     @members.each do |member|
-      finalist = finalists.shuffle![0]
+      finalist = finalists.sample
       puts "#{member.name} cast their vote for #{finalist}"
       votes[finalist] += 1
     end
@@ -21,13 +21,13 @@ class Jury
 	end
 
   def report_votes(final_votes)
-    final_votes.each do |k, v|
-      puts "Finalist: #{k}, Votes: #{v}"
+    final_votes.each do |key, value|
+      puts "Finalist: #{key}, Votes: #{value}"
     end
   end
 
   def announce_winner(final_votes)
-    winner = final_votes.max_by { |k, v| v }
+    winner = final_votes.max_by { |key, value| value }
     puts "\nThe winner is #{winner[0].to_s.colorize(:yellow)}!"
     winner[0]
   end

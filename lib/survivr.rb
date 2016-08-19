@@ -22,14 +22,12 @@ puts "\nWelcome to Survivr!".black.on_yellow.blink
 #This is where you will write your code for the three phases
 def phase_one
 	puts "\nPhase One".colorize(:color => :blue, :background => :white)
-	 immunity_challenges = 8
 	 eliminated_members = []
-	 immunity_challenges.times do
-	 	immune_tribe = @borneo.immunity_challenge
-	 	# losing_tribe = @borneo
-	 	losing_tribe = @borneo.get_losing_tribe(immune_tribe)
-	 	eliminated_member = losing_tribe.tribal_council(immune: immune_tribe.members)
-	 	losing_tribe.members.delete(eliminated_member)
+	 8.times do
+	 	losing_tribe = @borneo.immunity_challenge
+	 	# losing_tribe = @borneo.get_losing_tribe(immune_tribe)
+	 	eliminated_member = losing_tribe.tribal_council()
+	 	# losing_tribe.members.delete(eliminated_member)
 	 	eliminated_members.push(eliminated_member)
 	 end
 	eliminated_members.length
@@ -42,7 +40,7 @@ def phase_two
 	 immunity_challenges.times do
 	 	immune_player = @borneo.individual_immunity_challenge
 	 	eliminated_member = @merge_tribe.tribal_council(immune: immune_player)
-	 	@merge_tribe.members.delete(eliminated_member)
+	 	# @merge_tribe.members.delete(eliminated_member)
 	 	eliminated_members.push(eliminated_member)
 	 end
 	 eliminated_members.length
@@ -55,7 +53,7 @@ def phase_three
 	 immunity_challenges.times do
 	 	immune_player = @borneo.individual_immunity_challenge
 	 	eliminated_member = @merge_tribe.tribal_council(immune: immune_player)
-	 	@merge_tribe.members.delete(eliminated_member)
+	 	# @merge_tribe.members.delete(eliminated_member)
 	 	eliminated_members.push(eliminated_member)
 	 	@jury.add_member(eliminated_member)
 	 end

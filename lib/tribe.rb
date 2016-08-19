@@ -9,9 +9,14 @@ class Tribe
     puts_tribemates(@name, @members)
   end
 
-  def tribal_council(immune)
-  	non_immune_members = @members.select { |m| m != immune[:immune] }
-  	voted_off_member = non_immune_members.first
+  def tribal_council(options={})
+    if (options[:immune])
+      non_immune_members = @members.select { |member| member!= options[:immune] }
+    else
+      non_immune_members = @members
+    end
+
+  	voted_off_member = non_immune_members.sample
     puts_voted_off_member(voted_off_member)
   	@members.delete(voted_off_member)
     puts_remaining_tribemates
